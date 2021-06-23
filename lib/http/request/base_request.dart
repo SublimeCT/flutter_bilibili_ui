@@ -1,3 +1,5 @@
+import 'package:bilibili/http/dao/login_dao.dart';
+
 enum HttpMethod {
   GET,
   POST,
@@ -16,13 +18,17 @@ abstract class BaseRequest {
   String pathParams;
 
   /// 是否启用 https
-  bool useHttps = true;
+  bool useHttps = false;
 
   /// 域名
-  String authority() => "api.devio.org";
+  String authority() => "localhost:3000";
+  // String authority() => "api.devio.org";
 
   /// 请求方法
   HttpMethod httpMethod();
+
+  /// method
+  String get $method => httpMethod().toString().split('.')[1];
 
   /// path 部分
   String path();
@@ -39,6 +45,10 @@ abstract class BaseRequest {
     Uri uri = useHttps
         ? Uri.https(authority(), _path, params)
         : Uri.http(authority(), _path, params);
+    // 为需要登录的接口携带登录令牌
+    if (needLogin()) {
+      addHeader(LoginDao.BOARDING_PASS, LoginDao.getBoardingPass());
+    }
     return uri.toString();
   }
 
@@ -48,6 +58,17 @@ abstract class BaseRequest {
   /// 添加 `query` 参数
   BaseRequest add(String key, Object value) {
     params[key] = value.toString();
+    return this;
+  }
+
+  /// 添加多个 `query` 参数
+  BaseRequest addQueries(Map<String, Object> queries) {
+    print('add quyeries:' + queries.toString());
+    queries.forEach((key, value) {
+      // value;
+      // print('蛤: ' + key + '?' + value);
+      if (key != null && value != null) params[key] = value.toString();
+    });
     return this;
   }
 

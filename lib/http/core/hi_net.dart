@@ -19,7 +19,7 @@ class HiNet {
     } on HiNetError catch (e) {
       error = e;
       response = e.data;
-      printLog("///////////////////");
+      printLog("///////////////////" + e.message);
       // printLog(e.message);
     } catch (e) {
       error = e;
@@ -42,7 +42,7 @@ class HiNet {
       case 403:
         throw NeedAuth(result.toString(), data: result);
       default:
-        throw HiNetError(status, result.toString(), data: result);
+        throw HiNetError(status ?? -1, response?.statusMessage, data: result);
     }
   }
 
@@ -50,7 +50,8 @@ class HiNet {
     print('url: ${request.url()}');
     // HiNetAdapter adapter = MockAdapter();
     HiNetAdapter adapter = DioAdapter();
-    return await adapter.send(request);
+    HiNetResponse res = await adapter.send(request);
+    return res;
   }
 
   void printLog(log) {

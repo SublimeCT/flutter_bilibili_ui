@@ -8,17 +8,18 @@ class DioAdapter extends HiNetAdapter {
   Future<HiNetResponse<T>> send<T>(BaseRequest request) async {
     var response,
         option = BaseOptions(
-          method: request.httpMethod().toString(),
+          method: request.$method,
           headers: request.headers,
         );
     var error;
+    print('??????');
     try {
-      response = await Dio(option)
-          .fetch(RequestOptions(path: request.url(), data: request.params));
+      response = await Dio(option).fetch(RequestOptions(
+          path: request.url(), method: request.$method, data: request.params));
     } on DioError catch (e) {
       error = e;
       response = e.response ?? HiNetResponse();
-      print(response.toString());
+      print('dio error: ' + response.toString());
     }
     if (error != null || response == null) {
       throw HiNetError(response.statusCode ?? -1, error.toString());
