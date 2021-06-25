@@ -5,11 +5,12 @@ import 'package:bilibili/http/request/base_request.dart';
 class MockAdapter extends HiNetAdapter {
   @override
   Future<HiNetResponse<T>> send<T>(BaseRequest request) {
-    return Future<HiNetResponse>.delayed(Duration(seconds: 2), () {
-      return HiNetResponse(data: {
+    return Future<HiNetResponse<T>>.delayed(Duration(seconds: 2), () {
+      final res = {
         'code': 0,
         'message': 'success',
-      }, statusCode: 200);
+      };
+      return HiNetResponse<T>(res as T, statusCode: 200);
     });
   }
 }

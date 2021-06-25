@@ -18,22 +18,22 @@ class DioAdapter extends HiNetAdapter {
           path: request.url(), method: request.$method, data: request.params));
     } on DioError catch (e) {
       error = e;
-      response = e.response ?? HiNetResponse();
+      response = e.response ?? HiNetResponse({});
       print('dio error: ' + response.toString());
     }
     if (error != null || response == null) {
       throw HiNetError(response.statusCode ?? -1, error.toString());
     }
-    return buildRes(response, request);
+    return buildRes<T>(response, request);
   }
 
   /// 构建 HiNetResponse
-  HiNetResponse buildRes(Response response, BaseRequest request) {
+  HiNetResponse<T> buildRes<T>(Response response, BaseRequest request) {
     return HiNetResponse(
-      data: response.data,
+      response.data,
       request: request,
-      statusCode: response.statusCode,
-      statusMessage: response.statusMessage,
+      statusCode: response.statusCode ?? -1,
+      statusMessage: response.statusMessage ?? '',
       extra: response,
     );
   }

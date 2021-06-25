@@ -7,12 +7,15 @@ import 'dio_adapter.dart';
 
 class HiNet {
   HiNet._();
-  static HiNet _instance;
-  static HiNet getInstance() =>
-      _instance == null ? (_instance = new HiNet._()) : _instance;
+  static HiNet? _instance;
+  static HiNet getInstance() {
+    HiNet? instance = _instance;
+    if (instance == null) instance = new HiNet._();
+    return instance;
+  }
 
   Future fire(BaseRequest request) async {
-    HiNetResponse response = new HiNetResponse();
+    HiNetResponse response = new HiNetResponse({});
     dynamic error;
     try {
       response = await send(request);
@@ -27,7 +30,7 @@ class HiNet {
     }
 
     if (response == null) {
-      response = HiNetResponse();
+      response = HiNetResponse({});
     } else if (response.data == null) {
       printLog(error);
     }
@@ -42,7 +45,8 @@ class HiNet {
       case 403:
         throw NeedAuth(result.toString(), data: result);
       default:
-        throw HiNetError(status ?? -1, response?.statusMessage, data: result);
+        throw HiNetError(status ?? -1, response?.statusMessage ?? '',
+            data: result);
     }
   }
 

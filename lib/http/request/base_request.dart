@@ -15,7 +15,7 @@ enum HttpMethod {
 /// - pathParams: `foo/:bar` 中的 `/:bar` 部分
 abstract class BaseRequest {
   /// `foo/:bar` 中的 `/:bar` 部分
-  String pathParams;
+  String pathParams = '';
 
   /// 是否启用 https
   bool useHttps = false;

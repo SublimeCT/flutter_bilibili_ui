@@ -13,15 +13,15 @@ class LoginDao {
       _send(userName, password, imoocId: imoocId, orderId: orderId);
 
   static _send(String userName, String password,
-      {String imoocId, String orderId}) async {
+      {String? imoocId, String? orderId}) async {
     final BaseRequest request = imoocId != null && orderId != null
         ? RegistrationRequest()
         : LoginRequest();
     request.addQueries({
       'userName': userName,
       'password': password,
-      'imoocId': imoocId,
-      'orderId': orderId,
+      'imoocId': imoocId ?? '',
+      'orderId': orderId ?? '',
     });
     var result = await HiNet.getInstance().fire(request);
     // print(result);
@@ -39,5 +39,6 @@ class LoginDao {
     //     : {"code": 0, "data": 'CIOA', "extra": {}, "msg": "registion success."};
   }
 
-  static String getBoardingPass() => HiCache.getInstance().get(BOARDING_PASS);
+  static String getBoardingPass() =>
+      HiCache.getInstance().getString(BOARDING_PASS);
 }
