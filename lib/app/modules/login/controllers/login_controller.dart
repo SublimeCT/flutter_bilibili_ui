@@ -1,9 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
 
-  final count = 0.obs;
+  RxString username = ''.obs;
+  RxString password = ''.obs;
+  RxBool passwordFocus = false.obs;
+  final passwordFocusNode = Rx<FocusNode>(new FocusNode());
+
   @override
   void onInit() {
     super.onInit();
@@ -11,10 +16,12 @@ class LoginController extends GetxController {
 
   @override
   void onReady() {
+    passwordFocusNode.value.addListener(() {
+      passwordFocus.value = passwordFocusNode.value.hasFocus == true;
+    });
     super.onReady();
   }
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

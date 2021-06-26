@@ -1,11 +1,16 @@
 import 'package:bilibili/db/hi_cache.dart';
+import 'package:bilibili/themes/themes.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
 
 void main() async {
+  if (GetPlatform.isAndroid) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  }
   runApp(
     MyApp(),
   );
@@ -24,6 +29,7 @@ final MyApp = () => FutureBuilder(
             title: "Application",
             initialRoute: AppPages.INITIAL,
             getPages: AppPages.routes,
+            theme: AppThemes.light,
           );
         } else {
           return MaterialApp(
