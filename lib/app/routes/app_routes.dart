@@ -14,5 +14,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const REGISTION = '/registion';
   static const LOGIN = '/login';
-  static const INDEX = '/index';
+  static const INDEX = '/';
 }
