@@ -23,7 +23,8 @@ class IndexController extends GetxController {
   checkLogin() {
     print('若不存在 token 则跳转到登录页: ${token == ''}');
     // 若不存在 token 则跳转到登录页, 并移除之前的全部 `history`
-    if (token == '') Get.offNamed(Routes.LOGIN);
+    if (token == '') Get.offNamed(Routes.REGISTION);
+    // if (token == '') Get.offNamed(Routes.LOGIN);
   }
 
   @override

@@ -1,9 +1,15 @@
 import 'package:get/get.dart';
 
 class RegistionController extends GetxController {
-  //TODO: Implement RegistionController
+  //TODO: Implement LoginController
 
-  final count = 0.obs;
+  RxString username = ''.obs;
+  RxString password = ''.obs;
+  RxString confirmPassword = ''.obs;
+  RxString imoocID = ''.obs;
+  RxString imoocOrderID = ''.obs;
+  RxBool passwordFocus = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -16,5 +22,4 @@ class RegistionController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

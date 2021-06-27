@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class AppColors {
+  static const int PRIMARY = 0xFFFB7299;
+
+  static const MaterialColor primary = MaterialColor(
+      AppColors.PRIMARY, const <int, Color>{50: const Color(0xFFFF9db5)});
+
   /// `light theme` 主色
-  static const Color lightPrimary = Color(0xFFFB7299);
+  static const Color lightPrimary = Color(AppColors.PRIMARY);
 
   /// `light theme` `dark` 主色
   static const Color lightPrimaryDark = Color(0xFFEA6188);

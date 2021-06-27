@@ -1,3 +1,5 @@
+import 'package:bilibili/app/routes/app_pages.dart';
+import 'package:bilibili/widgets/login_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -15,9 +17,9 @@ class LoginView extends GetView<LoginController> {
         actions: [
           TextButton(
               onPressed: () {
-                print('forget');
+                Get.toNamed(Routes.REGISTION);
               },
-              child: Text('忘记密码'))
+              child: Text('注册'))
         ],
       ),
       body: Scrollable(
@@ -54,6 +56,14 @@ class LoginView extends GetView<LoginController> {
                 ),
                 obscureText: true,
                 maxLength: 16,
+              ),
+              Obx(() => Text(controller.username.value)),
+              LoginInput(
+                title: '用户名',
+                hint: '手机号码 / 邮箱',
+                onChanged: (val) {
+                  controller.username.value = val;
+                },
               ),
             ],
           );
