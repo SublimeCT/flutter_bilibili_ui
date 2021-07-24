@@ -63,6 +63,7 @@ class RegistionView extends GetView<RegistionController> {
             ),
             LoginInput(
               title: '慕课订单号',
+              keboardType: TextInputType.number,
               lineStreth: true,
               hint: '请输入订单号后四位',
               onChanged: (val) => controller.imoocOrderID.value = val,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// 应用颜色配置
+/// `@diff` 教程中放到了 `lib/util/color.dart` 中, 并且直接声明的常量, 在此处增加了 `AppColors`
 @immutable
 class AppColors {
   static const int PRIMARY = 0xFFFB7299;

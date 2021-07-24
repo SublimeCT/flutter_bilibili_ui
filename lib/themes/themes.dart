@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
+/// 应用主题配置
+/// `@diff` 教程中直接在使用的地方加入以下配置, 并未分离
 class AppThemes {
   static get light => ThemeData(
       brightness: Brightness.light,

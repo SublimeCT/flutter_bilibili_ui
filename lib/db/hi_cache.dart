@@ -67,7 +67,7 @@ class HiCache {
   //   if (prefs == null) prefs = await SharedPreferences.getInstance();
   // }
 
-  /// 初始化操作
+  /// 初始化操作 `@diff`
   /// 这里只判断了是否调用了 `HiCache.preInit()` 并等待初始化完成
   void init() {
     if (prefs == null)
