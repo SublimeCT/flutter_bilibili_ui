@@ -17,3 +17,24 @@ class HiNetError implements Exception {
 
   HiNetError(this.code, this.message, {this.data});
 }
+
+/// 未初始化异常
+class NoInit extends HiInternalError<String> {
+  NoInit({String message: '未初始化', String details: '', String? tag})
+      : super(10001, message, details, tag);
+}
+
+/// 内部错误异常基类
+class HiInternalError<E> implements Exception {
+  final int code;
+  final String? tag;
+  final String message;
+  final E data;
+
+  HiInternalError(
+    this.code,
+    this.message,
+    this.data, [
+    this.tag,
+  ]);
+}
